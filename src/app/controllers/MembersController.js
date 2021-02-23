@@ -8,20 +8,7 @@ module.exports = {
     create(req, res) {
         return res.render("instructors/create.html", { instructor })
     },
-    async post(req, res) {
-        const keys = Object.keys(req.body)
-
-        for(let key of keys) {
-            if(req.body[key] == "") {
-                return res.send("Please, fill all fields")
-            }
-        }
-
-        let results = await InstructorModel.create(req.body)
-        const instructor = results.rows[0]
-
-        return res.redirect(`/instructor/${instructor.id}`)
-        
+    post(req, res) {   
     },
     edit(req, res) {
         res.render("instructos/edit.html")
