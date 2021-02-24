@@ -16,9 +16,11 @@ CREATE TABLE "members" (
   "email" text,
   "birth" timestamp NOT NULL,
   "gender" text NOT NULL,
+  "blood_type" text,
   "weight" integer NOT NULL,
   "height" integer NOT NULL,
   "instructor_id" integer NOT NULL
+  "created_at" timestamp NOT NULL
 );
 
 ALTER TABLE "members" ADD FOREIGN KEY ("instructor_id") REFERENCES "instructors" ("id");

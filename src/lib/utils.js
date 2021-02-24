@@ -30,12 +30,15 @@ module.exports = {
         }
         
     },
-    bloodType: function(blood) {
-        console.log(blood)
-
+    bloodType: function(blood_type) {
         let bloodType
 
-        switch (blood) {
+        switch (blood_type) {
+            case 'NOTKNOW':
+                bloodType = "Não especificado"
+
+                return bloodType
+                break;
             case 'A1':
                 bloodType = "A+"
                 

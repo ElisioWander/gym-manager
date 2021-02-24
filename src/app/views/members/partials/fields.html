@@ -39,15 +39,17 @@
 <div class="item">
   <div>Tipo sanguíneo</div>
   <div>
-    <select name="blood">
-      <option value="A1" {% if member.blood == "A1" %}selected{%endif%}>A+</option>
-      <option value="A0" {% if member.blood == "A0" %}selected{%endif%}>A-</option>
-      <option value="B1" {% if member.blood == "B1" %}selected{%endif%}>B+</option>
-      <option value="B0" {% if member.blood == "B0" %}selected{%endif%}>B-</option>
-      <option value="AB1" {% if member.blood == "AB1" %}selected{%endif%}>AB+</option>
-      <option value="AB0" {% if member.blood == "AB0" %}selected{%endif%}>AB-</option>
-      <option value="O1" {% if member.blood == "O1" %}selected{%endif%}>O+</option>
-      <option value="O0" {% if member.blood == "O0" %}selected{%endif%}>O-</option>
+    <select name="blood_type">
+      <option value="" selected disabled>Selecione</option>
+      <option value="NOTKNOW" {% if member.blood_type == "NOTKNOW" %}selected{% endif %}>Não especificado</option>
+      <option value="A1" {% if member.blood_type == "A1" %}selected{%endif%}>A+</option>
+      <option value="A0" {% if member.blood_type == "A0" %}selected{%endif%}>A-</option>
+      <option value="B1" {% if member.blood_type == "B1" %}selected{%endif%}>B+</option>
+      <option value="B0" {% if member.blood_type == "B0" %}selected{%endif%}>B-</option>
+      <option value="AB1" {% if member.blood_type == "AB1" %}selected{%endif%}>AB+</option>
+      <option value="AB0" {% if member.blood_type == "AB0" %}selected{%endif%}>AB-</option>
+      <option value="O1" {% if member.blood_type == "O1" %}selected{%endif%}>O+</option>
+      <option value="O0" {% if member.blood_type == "O0" %}selected{%endif%}>O-</option>
     </select>
   </div>
 </div>
@@ -69,6 +71,19 @@
       name="height"
       value="{{ member.height }}"
     />
+  </div>
+</div>
+<div class="item">
+  <div>Instrutor</div>
+  <div>
+    <select name="instructor">
+      <option value="" selected disabled>Selecione</option>
+      {% for instructor in instructorsOptions %}
+      <option value="{{ instructor.id }}" {% if member.instructor_id == instructor.id %}selected{% endif %}>
+        {{ instructor.name }}
+      </option>
+      {% endfor %}
+    </select>
   </div>
 </div>
 

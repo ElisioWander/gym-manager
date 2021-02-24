@@ -1,10 +1,12 @@
 const { age, date } = require('../../lib/utils')
-const Intl = require('intl')
 const InstructorModel = require('../models/InstructorModel')
 
 module.exports = {
-    index(req, res) {
-        return res.render("instructors/index.html")
+    async index(req, res) {
+        let results = await InstructorModel.all()
+        const instructors = results.rows
+
+        return res.render("instructors/index.html", { instructors })
     },
     create(req, res) {
         return res.render("instructors/create.html")

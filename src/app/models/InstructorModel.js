@@ -2,6 +2,14 @@ const { date } = require('../../lib/utils')
 const db = require('../../config/db')
 
 module.exports = {
+    all(data) {
+        return db.query(`
+            SELECT instructors.*, count(members) AS total_students
+            FROM instructors
+            LEFT JOIN members ON (members.instructor_id = instructors.id)
+            GROUP BY instructors.id
+        `)
+    },
     create(data) {
         const query = `
             INSERT INTO instructors (

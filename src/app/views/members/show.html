@@ -22,7 +22,7 @@
         </div>
         <div class="item">
             <div>Aniversário</div>
-            <div>{{ member.birth }}</div>
+            <div>{{ member.age }}</div>
         </div>
         <div class="item">
             <div>Sexo</div>
@@ -30,7 +30,7 @@
         </div>
         <div class="item">
             <div>Tipo Sanguíneo</div>
-            <div>{{ member.blood }}</div>
+            <div>{{ member.blood_type }}</div>
         </div>
         <div class="item">
             <div>Peso (kg)</div>
@@ -39,6 +39,18 @@
         <div class="item">
             <div>Altura (cm)</div>
             <div>{{ member.height }}</div>
+        </div>
+        <div class="item">
+            <div>Instrutor</div>
+            <div>{{ instructor.name }}</div>
+        </div>
+        <div class="item">
+            <div>Mensalidade</div>
+            <div>{{ instructor.monthly_fee }}</div>
+        </div>
+        <div class="item">
+            <div>Membro desde</div>
+            <div>{{ member.created_at }}</div>
         </div>
 
         <a class="button" href="/members/{{ member.id }}/edit">Editar</a>
