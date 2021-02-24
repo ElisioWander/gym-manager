@@ -27,20 +27,42 @@ module.exports = {
         let results = await InstructorModel.find(req.params.id)
         const instructor = results.rows[0]
 
+        if(!instructor) {
+            return res.send("Instructor not found!")
+        }
+
         instructor.age = age(instructor.birth)
         instructor.services = instructor.services.split(",")
         instructor.created_at = date(instructor.created_at).format
 
         return res.render("instructors/show.html", { instructor })
     },
-    edit(req, res) {
-        return res.render("instructors/edit.html")
+    async edit(req, res) {
+        let results = await InstructorModel.find(req.params.id)
+        const instructor = results.rows[0]
+
+        instructor.birth = date(instructor.birth).iso
+
+        return res.render(`instructors/edit.html`, { instructor })
     },
-    put(req, res) {
-        return
+    async put(req, res) {
+        const keys = Object.keys(req.body)
+
+        for(let key of keys) {
+            if(req.body[key] == "") {
+                return res.send("Please, fill all fiels!")
+            }
+        }
+
+        let results = await InstructorModel.update(req.body)
+        const instructor = results.rows[0]
+
+        return res.redirect(`/instructors/${req.body.id}`)
     },
-    delete(req, res) {
-        return
+    async delete(req, res) {
+        let results = await InstructorModel.delete(req.body.id)
+
+        return res.redirect("/instructors")
     }
 
 }

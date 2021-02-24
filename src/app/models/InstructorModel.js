@@ -28,6 +28,33 @@ module.exports = {
 
         return db.query(query, values)
     },
+    update(data) {
+        const query = `
+            UPDATE instructors SET
+                avatar_url=($1),
+                name=($2),
+                birth=($3),
+                gender=($4),
+                services=($5),
+                monthly_fee=($6)
+            WHERE id = $7
+        `
+
+        const values = [
+           data.avatar_url,
+           data.name,
+           date(data.birth).iso,
+           data.gender,
+           data.services,
+           data.monthly_fee,
+           data.id 
+        ]
+
+        return db.query(query, values)
+    },
+    delete(id) {
+        return db.query(`DELETE FROM instructors WHERE id = $1`, [id])
+    },
     find(id) {
        return db.query(`SELECT * FROM instructors WHERE id = $1`, [id])
     }

@@ -25,7 +25,7 @@
             <div>{{ "Masculino" if instructor.gender == "M" else "Feminino" }}</div>
         </div>
         <div class="item">
-            <div>Acompanhamento</div>
+            <div>Especialidade</div>
             <div>
                 {% for service in instructor.services %}
                     <span>{{ service }}</span>
@@ -33,12 +33,12 @@
             </div>
         </div>
         <div class="item">
-            <div>Desde</div>
-            <div>{{ instructor.created_at }}</div>
-        </div>
-        <div class="item">
             <div>Valor cobrado por mês</div>
             <div>{{ instructor.monthly_fee }}</div>
+        </div>
+        <div class="item">
+            <div>Desde</div>
+            <div>{{ instructor.created_at }}</div>
         </div>
 
         <a class="button" href="/instructors/{{ instructor.id }}/edit">Editar</a>

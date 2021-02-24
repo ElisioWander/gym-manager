@@ -208,10 +208,14 @@ a.button {
 
     color: #FFF;
     background-color: var(--primary-color);
+
+    transition: all 200ms;
 }
 
 button[type="submit"]:hover {
     cursor: pointer;
+
+    background-color: #5840a7;
 }
 
 a.button {
@@ -230,6 +234,10 @@ a.button:hover {
 #form-delete button[type="submit"] {
     margin-top: 8px;
 
+    background-color: lightgray;
+}
+
+#form-delete button[type="submit"]:hover {
     background-color: lightcoral;
 }
 /*FORM*/
