@@ -194,6 +194,21 @@ input::placeholder {
     font-weight: normal;
 }
 
+form select {
+    width: 100%;
+    padding: 8px 0 8px 4px;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    border-radius: 4px;
+
+    box-shadow: 2px 2px 2px -2px rgba(0, 0, 0, 0.5);
+    
+    color: #555;
+    background-color: #fff;
+}
+
 button[type="submit"],
 a.button {
     width: 100%;
@@ -227,8 +242,17 @@ a.button {
 }
 
 a.button:hover {
-    color: #000;
-    background-color: var(--secondary-color) ;
+    background-color: #5840a7;
+}
+
+a.button.back {
+    margin-top: 8px;
+
+    background-color: lightgray;
+}
+
+a.button.back:hover {
+    background-color: #5840a7;
 }
 
 #form-delete button[type="submit"] {

@@ -2,8 +2,11 @@ const { date, bloodType } = require('../../lib/utils')
 const MemberModel = require('../models/MemberModel')
 
 module.exports = {
-    index(req, res) {
-        return res.render("members/index.html")
+    async index(req, res) {
+        let results = await MemberModel.all()
+        const members = results.rows
+
+        return res.render("members/index.html", { members })
     },
     async create(req, res) {
         let results = await MemberModel.instructorsSelectOptions()
@@ -65,7 +68,9 @@ module.exports = {
 
         return res.redirect(`/members/${req.body.id}`)
     },
-    delete(req, res) {
-        return
+    async delete(req, res) {
+        let results = await MemberModel.delete(req.body.id)
+
+        return res.redirect("/members")
     }
 }

@@ -2,6 +2,9 @@ const { date } = require('../../lib/utils')
 const db = require('../../config/db')
 
 module.exports = {
+    all() {
+        return db.query(`SELECT * FROM members`)
+    },
     create(data) {
         const query = `
             INSERT INTO members (
@@ -72,6 +75,9 @@ module.exports = {
         ]
 
         return db.query(query, values)
+    },
+    delete(id) {
+        return db.query(`DELETE FROM members WHERE id = $1`, [id])
     },
     instructorsSelectOptions() {
         return db.query(`SELECT name, id, monthly_fee FROM instructors`)
