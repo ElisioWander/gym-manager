@@ -41,9 +41,6 @@ module.exports = {
         let results = await MemberModel.find(req.params.id)
         const member = results.rows[0]
 
-        results = await MemberModel.instructorsSelectOptions()
-        instructor = results.rows[0]
-
         if(!member) {
             res.send("Member not found!")
         }
@@ -53,10 +50,20 @@ module.exports = {
         member.created_at = date(member.created_at).format
 
 
-        return res.render("members/show.html", { member, instructor })
+        return res.render("members/show.html", { member })
     },
-    put(req, res) {
-        return
+    async put(req, res) {
+        const keys = Object.keys(req.body)
+
+        for(let key of keys) {
+            if(req.body[key] == "") {
+                return res.send("Please, fill all fields!")
+            }
+        }
+
+        let results = await MemberModel.update(req.body)
+
+        return res.redirect(`/members/${req.body.id}`)
     },
     delete(req, res) {
         return

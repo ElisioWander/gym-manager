@@ -35,7 +35,43 @@ module.exports = {
         return db.query(query, values)
     },
     find(id) {
-        return db.query(`SELECT * FROM members WHERE id = $1`, [id])
+        return db.query(`
+            SELECT members.*,
+            instructors.name AS instructor_name,
+            instructors.monthly_fee AS monthly_fee
+            FROM members
+            LEFT JOIN instructors ON (members.instructor_id = instructors.id)
+            WHERE members.id = $1`, [id])
+    },
+    update(data) {
+        const query = `
+            UPDATE members SET
+                avatar_url=($1),
+                name=($2),
+                email=($3),
+                birth=($4),
+                gender=($5),
+                blood_type=($6),
+                weight=($7),
+                height=($8),
+                instructor_id=($9)
+            WHERE id = $10
+        `
+
+        const values = [
+            data.avatar_url,
+            data.name,
+            data.email,
+            date(data.birth).iso,
+            data.gender,
+            data.blood_type,
+            data.weight,
+            data.height,
+            data.instructor,
+            data.id
+        ]
+
+        return db.query(query, values)
     },
     instructorsSelectOptions() {
         return db.query(`SELECT name, id, monthly_fee FROM instructors`)
