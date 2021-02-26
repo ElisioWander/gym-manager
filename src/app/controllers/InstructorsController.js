@@ -3,7 +3,21 @@ const InstructorModel = require('../models/InstructorModel')
 
 module.exports = {
     async index(req, res) {
-        let results = await InstructorModel.all()
+        let { page, filter, limit } = req.query
+
+        page = page || 1
+        limit = limit || 2
+
+        let offset = limit * (page - 1)
+
+        const params = {
+            filter,
+            page,
+            limit,
+            offset
+        }
+
+        let results = await InstructorModel.paginate(params)
         const instructors = results.rows
 
         return res.render("instructors/index.html", { instructors })

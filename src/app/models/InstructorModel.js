@@ -65,5 +65,36 @@ module.exports = {
     },
     find(id) {
        return db.query(`SELECT * FROM instructors WHERE id = $1`, [id])
+    },
+    paginate(params) {
+        const { filter, limit, offset } = params
+
+        let query = "",
+            filterQuery = "",
+            totalQuery = `(
+                SELECT count(*) FROM instructors
+            ) AS total`
+
+        if(filter) {
+            filterQuery = `
+                WHERE instructors.name ILIKE '%${filter}%'
+                OR instructors.services ILIKE '%${filter}%'
+            `
+
+            totalQuery = `(
+                SELECT count(*) FROM instructors
+                ${filterQuery}
+            ) AS total`
+        }
+
+        query = `
+            SELECT instructors.*, ${totalQuery}, count(members) AS total_students
+            FROM instructors
+            LEFT JOIN members ON (members.instructor_id = instructors.id)
+            ${filterQuery}
+            GROUP BY instructors.id LIMIT $1 OFFSET $2
+        `
+
+        return db.query(query, [limit, offset])
     }
 }
