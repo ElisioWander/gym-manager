@@ -20,7 +20,7 @@ module.exports = {
         let results = await InstructorModel.paginate(params)
         const instructors = results.rows
 
-        return res.render("instructors/index.html", { instructors })
+        return res.render("instructors/index.html", { instructors, filter })
     },
     create(req, res) {
         return res.render("instructors/create.html")

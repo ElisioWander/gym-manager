@@ -331,6 +331,13 @@ tbody tr td:last-child a,
 
     color: #FFF;
     background-color: var(--primary-color);
+
+    transition: all 200ms;
+}
+
+tbody tr td:last-child a:hover,
+.table-container .header a:hover {
+    background-color: #5840a7;
 }
 
 .table-container thead.instructors-table tr th:nth-child(3),
@@ -350,6 +357,10 @@ td:last-child {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
+}
+
+.table-container .header div a {
+    display: inline-block;
 }
 
 .table-container .header form {

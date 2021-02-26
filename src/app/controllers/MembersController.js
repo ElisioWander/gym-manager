@@ -3,10 +3,23 @@ const MemberModel = require('../models/MemberModel')
 
 module.exports = {
     async index(req, res) {
-        let results = await MemberModel.all()
+        let { page, filter, limit } = req.query
+
+        page = page || 1
+        limit = limit || 2
+        const offset = limit * (page - 1)
+
+        const params = {
+            page,
+            filter,
+            limit,
+            offset
+        }
+
+        let results = await MemberModel.paginate(params)
         const members = results.rows
 
-        return res.render("members/index.html", { members })
+        return res.render("members/index.html", { members, filter })
     },
     async create(req, res) {
         let results = await MemberModel.instructorsSelectOptions()

@@ -2,9 +2,6 @@ const { date } = require('../../lib/utils')
 const db = require('../../config/db')
 
 module.exports = {
-    all() {
-        return db.query(`SELECT * FROM members`)
-    },
     create(data) {
         const query = `
             INSERT INTO members (
@@ -81,5 +78,34 @@ module.exports = {
     },
     instructorsSelectOptions() {
         return db.query(`SELECT name, id, monthly_fee FROM instructors`)
+    },
+    paginate(params) {
+        const { filter, limit, offset } = params
+
+        let query = "",
+            filterQuery = "",
+            totalQuery = `(
+                SELECT count(*) FROM members 
+            ) AS total`
+
+        if(filter) {
+            filterQuery = `
+                WHERE members.name ILIKE '%${filter}%'
+                OR members.email ILIKE '%${filter}%'
+            `
+            totalQuery = `(
+                SELECT count(*) FROM members
+                ${filterQuery}
+            )`
+        }
+
+        query = `
+            SELECT members.*, ${totalQuery}
+            FROM members
+            ${filterQuery}
+            LIMIT $1 OFFSET $2
+        `
+
+        return db.query(query, [limit, offset])
     }
 }
