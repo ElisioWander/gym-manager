@@ -16,6 +16,7 @@ module.exports = {
             limit,
             offset
         }
+        
 
         let results = await InstructorModel.paginate(params)
         const instructors = results.rows
