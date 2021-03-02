@@ -357,6 +357,7 @@ td:last-child {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
+    align-self: start;
 }
 
 .table-container .header div a {
@@ -384,6 +385,27 @@ td:last-child {
 .table-container {
     display: grid;
     grid-template: 64px 1fr 16px / 1fr;
+}
+
+/*PAGINATION*/
+.table-container .pagination {
+    align-self: end;
+    justify-self: center;
+}
+
+.table-container .pagination a,
+.table-container .pagination span {
+    margin-right: 16px;
+
+    color: var(--primary-color);
+
+    transition: all 200ms;
+}
+
+.table-container .pagination a:hover {
+    font-size: 24px;
+
+    filter: brightness(0.3);
 }
 
 

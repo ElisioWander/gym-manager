@@ -16,12 +16,17 @@ module.exports = {
             limit,
             offset
         }
-        
 
         let results = await InstructorModel.paginate(params)
         const instructors = results.rows
 
-        return res.render("instructors/index.html", { instructors, filter })
+        const pagination = {
+            total: Math.ceil(instructors[0].total / limit),
+            page
+        }
+
+        return res.render("instructors/index.html", { instructors, filter, pagination })
+
     },
     create(req, res) {
         return res.render("instructors/create.html")

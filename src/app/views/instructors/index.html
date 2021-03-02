@@ -45,8 +45,10 @@
     </tbody>
   </table>
 
-  <div class="pagination">
-    
-  </div>
+  <div class="pagination"
+    data-total={{pagination.total}}
+    data-page={{pagination.page}}
+    data-filter={{filter}}
+  ></div>
 </div>
 {% endblock content %}
