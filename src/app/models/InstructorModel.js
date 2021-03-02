@@ -84,7 +84,9 @@ module.exports = {
             FROM instructors
             LEFT JOIN members ON (members.instructor_id = instructors.id)
             ${filterQuery}
-            GROUP BY instructors.id LIMIT $1 OFFSET $2
+            GROUP BY instructors.id
+            ORDER BY total_students DESC
+            LIMIT $1 OFFSET $2
         `
 
         return db.query(query, [limit, offset])

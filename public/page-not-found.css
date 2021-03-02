@@ -1,0 +1,16 @@
+.not-found {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.not-found span {
+    font-size: 24px;
+
+    color: #777;
+}
+
+.not-found a {
+    width: 120px;
+}

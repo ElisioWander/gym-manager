@@ -96,13 +96,14 @@ module.exports = {
             totalQuery = `(
                 SELECT count(*) FROM members
                 ${filterQuery}
-            )`
+            ) AS total`
         }
 
         query = `
             SELECT members.*, ${totalQuery}
             FROM members
             ${filterQuery}
+            ORDER BY name ASC
             LIMIT $1 OFFSET $2
         `
 

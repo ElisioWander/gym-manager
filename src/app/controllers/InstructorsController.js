@@ -20,6 +20,10 @@ module.exports = {
         let results = await InstructorModel.paginate(params)
         const instructors = results.rows
 
+        if(!instructors[0]) {
+            return res.render("instructors/page-not-found.html")
+        }
+
         const pagination = {
             total: Math.ceil(instructors[0].total / limit),
             page

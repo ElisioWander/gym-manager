@@ -1,6 +1,5 @@
 {% extends "layout.html" %}
 
-
 {% block content %}
 <div class="card table-container">
   <div class="header">
@@ -45,5 +44,11 @@
       {% endfor %}
     </tbody>
   </table>
+
+  <div class="pagination"
+    data-total={{pagination.total}}
+    data-page={{pagination.page}}
+    data-filter={{filter}}
+  ></div>
 </div>
 {% endblock content %}

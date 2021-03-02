@@ -19,7 +19,17 @@ module.exports = {
         let results = await MemberModel.paginate(params)
         const members = results.rows
 
-        return res.render("members/index.html", { members, filter })
+        if(!members[0]) {
+            return res.render("members/page-not-found.html")
+        }
+
+        const pagination = {
+            total: Math.ceil(members[0].total / limit),
+            page
+        }
+        
+        return res.render("members/index.html", { members, filter, pagination })
+
     },
     async create(req, res) {
         let results = await MemberModel.instructorsSelectOptions()

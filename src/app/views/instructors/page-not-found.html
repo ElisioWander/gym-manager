@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block links %}
+<link rel="stylesheet" href="page-not-found.css">
+{% endblock links %}
+
+
+{% block content %}
+<div class="card table-container">
+  <div class="header">
+    <div>
+      <a href="/instructors/create">Novo</a>
+    </div>
+  
+    <form action="/instructors" method="GET">
+      <input 
+        type="text"
+        name="filter"
+        placeholder="Instrutor ou Especialidade"  
+        value="{{filter}}"
+      >
+
+      <button type="submit">Filtrar</button>
+    </form>
+
+  </div>
+
+  <div class="not-found">
+    <span>Instrutor não encontrado!</span>
+
+    <a class="button" href="/instructors">Voltar</a>
+  </div>
+  
+</div>
+{% endblock content %}
