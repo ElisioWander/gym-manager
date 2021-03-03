@@ -49,6 +49,7 @@
       name="monthly_fee"
       placeholder="Valor de cobrança" 
       value="{{ instructor.monthly_fee }}"
+      onkeydown="Mask.apply(this, 'formatBRL')"
     >
   </div>
 </div>

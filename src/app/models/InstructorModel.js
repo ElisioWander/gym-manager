@@ -15,7 +15,7 @@ module.exports = {
             ) VALUES ($1, $2, $3, $4, $5, $6, $7)
             RETURNING id
         `
-
+        data.monthly_fee = data.monthly_fee.replace(/\D/g, "")
         const values = [
             data.avatar_url,
             data.name,
