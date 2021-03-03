@@ -83,5 +83,11 @@ module.exports = {
                 console.log("No option selected")
                 break;
         }
+    },
+    formatPrice(monthly_fee) {
+        return Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        }).format(monthly_fee/100)
     }
 }

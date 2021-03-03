@@ -39,7 +39,7 @@ module.exports = {
                 monthly_fee=($6)
             WHERE id = $7
         `
-
+        data.monthly_fee = data.monthly_fee.replace(/\D/g, "")
         const values = [
            data.avatar_url,
            data.name,

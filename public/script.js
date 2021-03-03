@@ -87,7 +87,7 @@ const Mask = {
     formatBRL(value) {
         value = value.replace(/\D/g, "")
 
-        return Intl.NumberFormat('pr-BR', {
+        return Intl.NumberFormat('pt-BR', {
             style: 'currency',
             currency: 'BRL'
         }).format(value/100)

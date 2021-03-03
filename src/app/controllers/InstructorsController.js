@@ -1,4 +1,4 @@
-const { age, date } = require('../../lib/utils')
+const { age, date, formatPrice } = require('../../lib/utils')
 const InstructorModel = require('../models/InstructorModel')
 
 module.exports = {
@@ -60,6 +60,7 @@ module.exports = {
         instructor.age = age(instructor.birth)
         instructor.services = instructor.services.split(",")
         instructor.created_at = date(instructor.created_at).format
+        instructor.monthly_fee = formatPrice(instructor.monthly_fee)
 
         return res.render("instructors/show.html", { instructor })
     },
@@ -68,6 +69,7 @@ module.exports = {
         const instructor = results.rows[0]
 
         instructor.birth = date(instructor.birth).iso
+        instructor.monthly_fee = formatPrice(instructor.monthly_fee)
 
         return res.render(`instructors/edit.html`, { instructor })
     },
@@ -81,7 +83,6 @@ module.exports = {
         }
 
         let results = await InstructorModel.update(req.body)
-        const instructor = results.rows[0]
 
         return res.redirect(`/instructors/${req.body.id}`)
     },

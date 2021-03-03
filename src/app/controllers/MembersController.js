@@ -1,4 +1,4 @@
-const { date, bloodType } = require('../../lib/utils')
+const { date, bloodType, formatPrice } = require('../../lib/utils')
 const MemberModel = require('../models/MemberModel')
 
 module.exports = {
@@ -74,6 +74,7 @@ module.exports = {
         member.age = date(member.birth).birthDay
         member.blood_type = bloodType(member.blood_type)
         member.created_at = date(member.created_at).format
+        member.monthly_fee = formatPrice(member.monthly_fee)
 
 
         return res.render("members/show.html", { member })
